@@ -78,11 +78,17 @@ function generateSMS() {
     const whenTime = getInput('when');
     const day = getInput('weekday');
     const status = getInput('status');
-    // Get the time directly from the input field
-    const currentTime = getInput('manualTime'); 
+    const currentTime = getInput('manualTime');
+
+    // Check if location is empty - don't generate if it is
+    if (!loc) {
+        document.getElementById('sms-output').textContent = "Vinsamlegast veljið staðsetningu.";
+        return;
+    }
 
     let finalMessage = "";
 
+ // ... rest of your switch statement ..
     // 2. Þýða IF úr excel í switch
     switch (level) {
         case "Fyrsta stig":
