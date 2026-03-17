@@ -347,10 +347,11 @@
     <!-- Upplýsingar valmöguleikar -- Staðsetning / Hvenær / Vikudagur / Staða -->
     <div class="section-label" style="margin-top:18px;">Upplýsingar</div>
 
-    <div class="field">
-      <label for="location">Staðsetning</label>
-      <select id="location" onchange="generateSMS()" disabled>
-        <option value="Raknadalshlíð" selected>Raknadalshlíð</option>
+  <div class="field">
+  <label for="location">Staðsetning</label>
+  <select id="location" onchange="generateSMS()" disabled>
+        <option value="" selected disabled>Velja staðsetningu…</option>
+        <option value="Raknadalshlíð">Raknadalshlíð</option>
         <option value="Flateyrarvegur">Flateyrarvegur</option>
         <option value="Súðavíkurhlíð">Súðavíkurhlíð</option>
         <option value="Siglufjarðarvegur">Siglufjarðarvegur</option>
