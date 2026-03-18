@@ -151,12 +151,14 @@
       cursor: pointer;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
-    input[type="time"] {
+  input[type="time"], input[type="text"] {
       background-image: none;
       padding-right: 12px;
+      cursor: text;
+    }
+    input[type="time"] {
       font-family: 'DM Mono', monospace;
       letter-spacing: 0.05em;
-      cursor: text;
     }
     select:focus, input[type="time"]:focus {
       outline: none;
@@ -406,12 +408,18 @@
       </div>
     </div>
 
+    <div class="field">  
+      <label for="extraText">Viðbótartexti</label>
+      <input type="text" id="extraText" placeholder="Valfrjáls texti hér..." oninput="generateSMS()" disabled>
+    </div>
+    
     <hr>
 
     <!-- Notice -->
     <div class="notice">
       <strong>Athugið:</strong> Munið að hafa samráð við verkstjóra þjónustustöðvar.
       <br>Á 4. stigi er <strong>Lokað</strong> sjálfvirkt sett inn í textann.
+       <br>
     </div>
 
     <hr>
