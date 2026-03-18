@@ -6,7 +6,6 @@ const DEPENDENT_DROPDOWN_IDS = [
     'when',
     'weekday',
     'status'
-    'extraText' //<-- auka box fyrir extra texta
 ];
 
 // Logo sem birtist í smástund og hverfur í byrjun
@@ -80,7 +79,6 @@ function generateSMS() {
     const day = getInput('weekday');
     const status = getInput('status');
     const currentTime = getInput('manualTime');
-    const extraText = document.getElementById('extraText').value.trim();
 
     // Check if location is empty - don't generate if it is
     if (!loc) {
@@ -122,10 +120,6 @@ function generateSMS() {
 
         default:
             finalMessage = "Villa: Óþekkt snjóflóðastig. Vinsamlegast athugið valinn valmöguleika.";
-
-    // Bæta við auka texta ef hann er ekki tómur
-        if (extraText !== "" && level !== "Fyrsta stig") {
-        finalMessage += " " + extraText;
     }
 
     // 3. Uppfæra html lokatexta
@@ -158,7 +152,7 @@ function copySMS() {
                 setTimeout(() => {
                     copyButton.textContent = "Afrita texta á klippiborð 📋";
                     copyButton.classList.remove("copied"); // Slekkur á græna litnum
-                    resetApp(); // <-- Endursetjum appið í upphafsstöðu fyrir næsta sms
+                    resetApp(); // <-- Hér köllum við á endurstillingu
                 }, 1500);
             }
         })
@@ -167,6 +161,11 @@ function copySMS() {
             alert("Djöfuls tölvudrasl..gat ekki afritað texta. Vinsamlegast veljið textann handvirkt.");
         });
 }
+
+
+// Passa að upphafsstaða komi á þegar síða er hlaðin aftur
+window.onload = handleLevelChange;
+
 /* Fúnksjón sem hreinsar allt og setur appið á upphafsreit */
 function resetApp() {
     // 1. Tæma dropdown listana og textabox
@@ -175,7 +174,6 @@ function resetApp() {
     document.getElementById('when').value = "í dag";
     document.getElementById('status').value = " ";
     document.getElementById('manualTime').value = "";
-    document.getElementById('extraText').value = "";
 
     // 2. Finna hvaða vikudagur er í dag til að endurstilla þann lista rétt
     const days = ['sunnudag','mánudag','þriðjudag','miðvikudag','fimmtudag','föstudag','laugardag'];
@@ -191,5 +189,3 @@ function resetApp() {
     // 3. Keyra handleLevelChange til að læsa reitunum aftur og uppfæra skilaboðagluggann
     handleLevelChange();
 }
-// Passa að upphafsstaða komi á þegar síða er hlaðin aftur
-window.onload = handleLevelChange;
