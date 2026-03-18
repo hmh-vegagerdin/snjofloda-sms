@@ -6,6 +6,7 @@ const DEPENDENT_DROPDOWN_IDS = [
     'when',
     'weekday',
     'status'
+    'extraText' //<-- auka box fyrir extra texta
 ];
 
 // Logo sem birtist í smástund og hverfur í byrjun
@@ -79,6 +80,7 @@ function generateSMS() {
     const day = getInput('weekday');
     const status = getInput('status');
     const currentTime = getInput('manualTime');
+    const extraText = document.getElementById('extraText').value.trim();
 
     // Check if location is empty - don't generate if it is
     if (!loc) {
@@ -120,6 +122,10 @@ function generateSMS() {
 
         default:
             finalMessage = "Villa: Óþekkt snjóflóðastig. Vinsamlegast athugið valinn valmöguleika.";
+
+    // Bæta við auka texta ef hann er ekki tómur
+        if (extraText !== "" && level !== "Fyrsta stig") {
+        finalMessage += " " + extraText;
     }
 
     // 3. Uppfæra html lokatexta
@@ -169,6 +175,7 @@ function resetApp() {
     document.getElementById('when').value = "í dag";
     document.getElementById('status').value = " ";
     document.getElementById('manualTime').value = "";
+    document.getElementById('extraText').value = "";
 
     // 2. Finna hvaða vikudagur er í dag til að endurstilla þann lista rétt
     const days = ['sunnudag','mánudag','þriðjudag','miðvikudag','fimmtudag','föstudag','laugardag'];
