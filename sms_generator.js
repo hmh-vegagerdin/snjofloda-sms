@@ -161,6 +161,28 @@ function copySMS() {
             alert("Djöfuls tölvudrasl..gat ekki afritað texta. Vinsamlegast veljið textann handvirkt.");
         });
 }
+/* Fúnksjón sem hreinsar allt og setur appið á upphafsreit */
+function resetApp() {
+    // 1. Tæma dropdown listana og textabox
+    document.getElementById('avalancheLevel').value = "";
+    document.getElementById('location').value = "";
+    document.getElementById('when').value = "í dag";
+    document.getElementById('status').value = " ";
+    document.getElementById('manualTime').value = "";
 
+    // 2. Finna hvaða vikudagur er í dag til að endurstilla þann lista rétt
+    const days = ['sunnudag','mánudag','þriðjudag','miðvikudag','fimmtudag','föstudag','laugardag'];
+    const today = days[new Date().getDay()];
+    const sel = document.getElementById('weekday');
+    for (let i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === today) { 
+          sel.selectedIndex = i; 
+          break; 
+      }
+    }
+
+    // 3. Keyra handleLevelChange til að læsa reitunum aftur og uppfæra skilaboðagluggann
+    handleLevelChange();
+}
 // Passa að upphafsstaða komi á þegar síða er hlaðin aftur
 window.onload = handleLevelChange;
