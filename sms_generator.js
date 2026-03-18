@@ -144,16 +144,19 @@ function copySMS() {
             // Tókst: staðfestingartexti
             alert("Þessi texti hefur verið afritaður á klippiborðið");
             
-            // Breyta takkatexta tímabundið (1.5 sekúndur)
+            // Breyta takkatexta og bæta við CSS class tímabundið (1.5 sekúndur)
             if (copyButton) {
                 copyButton.textContent = "Afritað! ✅";
+                copyButton.classList.add("copied"); // Kveikir á græna litnum
+                
                 setTimeout(() => {
-                copyButton.textContent = "Afrita texta á klippiborð 📋";
+                    copyButton.textContent = "Afrita texta á klippiborð 📋";
+                    copyButton.classList.remove("copied"); // Slekkur á græna litnum
+                    resetApp(); // <-- Endursetjum appið í upphafsstöðu fyrir næsta sms
                 }, 1500);
             }
         })
         .catch(err => {
-            // Error: This might happen if the page is not secure (not HTTPS)
             console.error('Could not copy text: ', err);
             alert("Djöfuls tölvudrasl..gat ekki afritað texta. Vinsamlegast veljið textann handvirkt.");
         });
